@@ -8,10 +8,14 @@ import (
 	"github.com/drizzleent/hezzl/internal/api/http/handler"
 	"github.com/drizzleent/hezzl/internal/config"
 	"github.com/drizzleent/hezzl/internal/config/env"
+	"github.com/drizzleent/hezzl/internal/service"
+	"github.com/drizzleent/hezzl/internal/service/goods"
 )
 
 type serviceProvicer struct {
 	httpConfig config.HTTPConfig
+
+	service service.Service
 
 	handler api.Handler
 }
@@ -33,9 +37,17 @@ func (s *serviceProvicer) HttpConfig() config.HTTPConfig {
 	return s.httpConfig
 }
 
+func (s *serviceProvicer) Service(ctx context.Context) service.Service {
+	if nil == s.service {
+		s.service = goods.NewService()
+	}
+
+	return s.service
+}
+
 func (s *serviceProvicer) Handler(ctx context.Context) api.Handler {
 	if nil == s.handler {
-		s.handler = handler.NewHandler()
+		s.handler = handler.NewHandler(s.Service(ctx))
 	}
 
 	return s.handler

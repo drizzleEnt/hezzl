@@ -7,5 +7,6 @@ import (
 )
 
 func (h *handler) GetList(ctx *gin.Context) {
+	h.s.GetList(ctx)
 	ctx.JSON(http.StatusOK, "list")
 }

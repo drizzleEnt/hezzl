@@ -7,5 +7,6 @@ import (
 )
 
 func (h *handler) Remove(ctx *gin.Context) {
+	h.s.Remove(ctx)
 	ctx.JSON(http.StatusOK, "Remove")
 }

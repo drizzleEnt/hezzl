@@ -7,5 +7,6 @@ import (
 )
 
 func (h *handler) Reprioritiize(ctx *gin.Context) {
+	h.s.Repriotiize(ctx)
 	ctx.JSON(http.StatusOK, "reprioritiize")
 }

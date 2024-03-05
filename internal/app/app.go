@@ -77,7 +77,7 @@ func (a *App) initHTTPServer(ctx context.Context) error {
 }
 
 func (a *App) runHTTPServer() error {
-	log.Printf("Server running on: ")
+	log.Printf("Server running on: %s", a.serviceProvicer.HttpConfig().Address())
 
 	err := a.httpServer.ListenAndServe()
 

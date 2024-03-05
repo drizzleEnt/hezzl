@@ -1,12 +1,18 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/drizzleent/hezzl/internal/service"
+	"github.com/gin-gonic/gin"
+)
 
 type handler struct {
+	s service.Service
 }
 
-func NewHandler() *handler {
-	return &handler{}
+func NewHandler(srv service.Service) *handler {
+	return &handler{
+		s: srv,
+	}
 }
 
 func (h *handler) InitRoutes() *gin.Engine {
